@@ -187,22 +187,22 @@ fun PasswordInputComponent(labelVal: String) {
 }
 
 @Composable
-fun ForgotPasswordTextComponent(navController: NavHostController) {
+fun ForgotPasswordTextComponent(onForgotPasswordClicked: () -> Unit) {
     Text(
         text = "Forgot Password?",
         color = BrandColor,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         modifier = Modifier.clickable {
-            navController.navigate("ForgotPassword")
+            onForgotPasswordClicked()
         }
     )
 }
 
 @Composable
-fun MyButton(labelVal: String, navController: NavHostController) {
+fun MyButton(labelVal: String, onClick: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = BrandColor
         ),
@@ -213,20 +213,15 @@ fun MyButton(labelVal: String, navController: NavHostController) {
         Text(
             text = labelVal,
             color = Color.White,
-            fontSize = 18.sp,
-            modifier = Modifier.clickable {
-                if (labelVal == "Submit") {
-                    navController.navigate("ResetPassword")
-                }
-            }
+            fontSize = 18.sp
         )
     }
 }
 
 @Composable
-fun BottomComponent(navController: NavHostController) {
+fun BottomComponent(onContinueClicked: () -> Unit) {
     Column {
-        MyButton(labelVal = "Continue", navController = navController)
+        MyButton(labelVal = "Continue", onClick = onContinueClicked)
         Spacer(modifier = Modifier.height(10.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -283,7 +278,7 @@ fun BottomComponent(navController: NavHostController) {
 }
 
 @Composable
-fun BottomLoginTextComponent(initialText: String, action: String, navController: NavHostController) {
+fun BottomLoginTextComponent(initialText: String, action: String, onSignupClicked: () -> Unit) {
     val annotatedString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Tertirary)) {
             append(initialText)
@@ -299,7 +294,7 @@ fun BottomLoginTextComponent(initialText: String, action: String, navController:
             .firstOrNull()?.also { span ->
                 Log.d("BottomLoginTextComponent", "${span.item} is Clicked")
                 if (span.item == "Join our coven!") {
-                    navController.navigate("SignupScreen")
+                    onSignupClicked()
                 }
             }
     })
@@ -342,7 +337,7 @@ fun SignupTermsAndPrivacyText() {
 }
 
 @Composable
-fun BottomSignupTextComponent(navController: NavHostController) {
+fun BottomSignupTextComponent(onLoginClicked: () -> Unit) {
     val initialText = "Are you a familiar spirit? "
     val loginText = "Log In"
     val lastText = " again and join our Halloween party!"
@@ -364,7 +359,7 @@ fun BottomSignupTextComponent(navController: NavHostController) {
         annotatedString.getStringAnnotations(it, it)
             .firstOrNull()?.also { span ->
                 if (span.item == "Log In") {
-                    navController.navigate("LoginScreen")
+                    onLoginClicked()
                 }
             }
     })

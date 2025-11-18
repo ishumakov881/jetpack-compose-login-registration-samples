@@ -26,12 +26,18 @@ import com.montanainc.halloween.components.MyTextField
 import com.montanainc.halloween.components.PasswordInputComponent
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(
+    onForgotPasswordClicked: () -> Unit,
+    onSignupClicked: () -> Unit,
+    onContinueClicked: () -> Unit
+) {
     Surface(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp),
         color = Color.White
     ) {
-        Column() {
+        Column {
             ImageComponent(image = R.drawable.sweet_franky)
             Spacer(modifier = Modifier.height(10.dp))
             HeadingTextComponent(heading = "Login")
@@ -41,23 +47,23 @@ fun LoginScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(15.dp))
                 PasswordInputComponent(labelVal = "Password")
                 Spacer(modifier = Modifier.height(15.dp))
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    ForgotPasswordTextComponent(navController)
-                }
+//                Row(
+//                    horizontalArrangement = Arrangement.End,
+//                    modifier = Modifier.fillMaxWidth()
+//                ) {
+//                    ForgotPasswordTextComponent(onForgotPasswordClicked)
+//                }
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.BottomStart
                 ) {
                     Column {
-                        BottomComponent(navController)
+                        BottomComponent(onContinueClicked)
                         Spacer(modifier = Modifier.height(12.dp))
                         BottomLoginTextComponent(
                             initialText = "Haven't we seen you around here before? ",
                             action = "Join our coven!",
-                            navController
+                            onSignupClicked
                         )
                     }
                 }

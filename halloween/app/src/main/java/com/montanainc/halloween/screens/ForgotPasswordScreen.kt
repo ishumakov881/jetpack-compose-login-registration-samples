@@ -19,7 +19,7 @@ import com.montanainc.halloween.components.MyTextField
 import com.montanainc.halloween.components.TextInfoComponent
 
 @Composable
-fun ForgotPasswordScreen(navController: NavHostController) {
+fun ForgotPasswordScreen(onSubmitClicked: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -35,7 +35,7 @@ fun ForgotPasswordScreen(navController: NavHostController) {
             )
             Spacer(modifier = Modifier.height(20.dp))
             MyTextField(labelVal = "email ID", icon = R.drawable.at_symbol)
-            MyButton(labelVal = "Submit", navController)
+            MyButton(labelVal = "Submit", onClick = onSubmitClicked)
         }
     }
 }

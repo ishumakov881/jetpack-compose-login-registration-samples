@@ -17,7 +17,11 @@ fun Navigation() {
             route = "LoginScreen"
         ) {
             LoginScreen(
-                navController
+                onForgotPasswordClicked = { navController.navigate("ForgotPassword") },
+                onSignupClicked = { navController.navigate("SignupScreen") },
+                onContinueClicked = {
+                    // TODO: Handle login logic
+                }
             )
         }
         composable(
